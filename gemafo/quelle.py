@@ -9,10 +9,10 @@ class Quelle(GematikObjekt):
                  titel,
                  dokumentenkuerzel='',
                  version='',
-                 vorgaenger=None,
-                 nachfolger=None):
+                 prev=None,
+                 next=None):
 
-        super().__init__(id, titel, vorgaenger, nachfolger)
+        super().__init__(id, titel, prev, next)
         self.dokumentenkuerzel = dokumentenkuerzel
         self.version = version
 

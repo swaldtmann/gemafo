@@ -12,10 +12,10 @@ class Anbietertypsteckbrief(Quelle):
                  dokumentenkuerzel='',
                  dateiname_pdf='',
                  dateiname_xlsx='',
-                 vorgaenger=None,
-                 nachfolger=None):
+                 prev=None,
+                 next=None):
 
-        super().__init__(id, titel, vorgaenger, nachfolger)
+        super().__init__(id, titel, prev, next)
         self.version = version
         self.anbietertyp_version = anbietertyp_version
         self.dokumentenkuerzel = dokumentenkuerzel

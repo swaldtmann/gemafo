@@ -1,5 +1,5 @@
+
 # -*- coding: utf-8 -*-
-# from . import helpers
 
 from difflib import Differ
 from inspect import getmembers
@@ -9,22 +9,61 @@ from pprint import pprint
 SKIP_SAME_LINES = False
 
 
-class GematikObjekt(object):
+class DoubleLinkeNode(object):
+    def __init__(self,
+                 prev=None,
+                 next=None):
+        self.prev = prev
+        self.next = next
+
+    def is_head(self):
+        return self.prev is None
+
+    def is_tail(self):
+        return self.next is None
+
+    # O(N), expensive!
+    def tail(self):
+        if self.is_tail:
+            return self
+        return self.next.end()
+
+    # O(N), expensive!
+    def head(self):
+        if self.is_head():
+            return self
+        return self.prev.head()
+
+    # insert behind this node
+    def insert(self, node):
+        node.next = self.next
+        node.prev = self
+        self.next = node
+        if self.next is not None:
+            self.next.prev = node
+
+    # insert behind last node
+    # O(N), expensive!
+    def append(self, node):
+        end = self.tail()
+        self.insert(node)
+
+
+class GematikObjekt(DoubleLinkeNode):
     def __init__(self,
                  id,
                  titel,
-                 vorgaenger=None,
-                 nachfolger=None):
+                 prev=None,
+                 next=None):
         self.id = id
         self.titel = titel
-        self.vorgaenger = vorgaenger
-        self.nachfolger = nachfolger
+        super().__init__(prev, next)
 
     def __str__(self):
         return ("id: " + self.id + ", "
                 + "titel: " + self.titel + ", "
-                + "vorgaenger: " + str(self.vorgaenger) + ", "
-                + "nachfolger: " + str(self.nachfolger))
+                + "prev: " + str(self.prev) + ", "
+                + "next: " + str(self.next))
 
     def __repr__(self):
         return f'{type(self).__name__}(id=\"{self.id}\", '\

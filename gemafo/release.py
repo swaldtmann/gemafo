@@ -8,10 +8,10 @@ class Release(GematikObjekt):
                  id,
                  titel,
                  beschreibung='',
-                 vorgaenger=None,
-                 nachfolger=None):
+                 prev=None,
+                 next=None):
 
-        super().__init__(id, titel, vorgaenger, nachfolger)
+        super().__init__(id, titel, prev, next)
         self.beschreibung = beschreibung
 
     def __str__(self):

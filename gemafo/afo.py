@@ -13,10 +13,10 @@ class Afo(GematikObjekt):
                  afo_version='',
                  quelle_referenz='',
                  pruefverfahren='',
-                 vorgaenger=None,
-                 nachfolger=None):
+                 prev=None,
+                 next=None):
 
-        super().__init__(id, titel, vorgaenger, nachfolger)
+        super().__init__(id, titel, prev, next)
 
         self.beschreibung = beschreibung
         self.afo_level = afo_level
